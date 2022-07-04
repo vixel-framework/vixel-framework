@@ -10,29 +10,33 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    strategy:
+      fail-fast: true
+      matrix:
+        php: [8.0, 8.1]
+    
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - name: Validate composer.json and composer.lock
-      run: composer validate --strict
+      - name: Validate composer.json and composer.lock
+        run: composer validate --strict
 
-    - name: Cache Composer packages
-      id: composer-cache
-      uses: actions/cache@v2
-      with:
-        path: vendor
-        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-php-
-    - name: Install dependencies
-      run: composer install --prefer-dist --no-progress
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v2
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress
 
-    - name: Execute tests
-      run: vendor/bin/phpunit --coverage-clover=coverage.xml
+      - name: Execute tests
+        run: vendor/bin/phpunit --coverage-clover=coverage.xml
 
-    - name: Psalm – Static Analysis for PHP
-      uses: psalm/psalm-github-actions@1.1.2
+      - name: Psalm – Static Analysis for PHP
+        uses: psalm/psalm-github-actions@1.1.2
 
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v1
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
