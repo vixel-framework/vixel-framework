@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<psalm name="Halite Psalm Configuration"
+<psalm name="Vixel Hasher Psalm Configuration"
        useDocblockTypes="true">
     <projectFiles>
         <directory name="./src" />
