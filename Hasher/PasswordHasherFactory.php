@@ -16,7 +16,7 @@ namespace Vixel\Hasher;
 use RuntimeException;
 use UnexpectedValueException;
 
-class PasswordHasherFactory implements PasswordHasherInterface
+class PasswordHasherFactory implements PasswordHasherFactoryInterface, PasswordHasherInterface
 {
     /** @var \Vixel\Hasher\PasswordHasherInterface|null The built password hasher. */
     private PasswordHasherInterface|null $passwordHasher = null;
