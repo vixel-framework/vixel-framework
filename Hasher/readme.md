@@ -1,4 +1,3 @@
-> This repositroy is a read-only repository. Please see <https://github.com/vixel-framework/vixel-framework> instead.
 # Vixel Hashing Component
 [![Vixel Hasher](https://github.com/vixel-framework/hasher/actions/workflows/vixel-hasher.yml/badge.svg)](https://github.com/vixel-framework/hasher/actions/workflows/vixel-hasher.yml)
 ## Security Vulnerabilities
