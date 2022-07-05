@@ -1,6 +1,6 @@
 <?php
 /**
- * GNU Lesser General Public License v2.1
+ * GNU Lesser General Public License v2.1.
  *
  * Copyright (c) 2022 Nicholas English
  *
@@ -12,8 +12,6 @@
  */
 
 namespace Vixel\Hasher;
-
-use InvalidArgumentException;
 
 interface PasswordHasherInterface
 {
