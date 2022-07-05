@@ -1,6 +1,6 @@
 <?php
 /**
- * GNU Lesser General Public License v2.1
+ * GNU Lesser General Public License v2.1.
  *
  * Copyright (c) 2022 Nicholas English
  *
@@ -13,40 +13,39 @@
 
 namespace Vixel\Hasher;
 
-use InvalidArgumentException;
 use RuntimeException;
 use UnexpectedValueException;
 
 class PasswordHasherFactory implements PasswordHasherInterface
 {
-    /** @var \Vixel\Hasher\PasswordHasherInterface|null $passwordHasher The built password hasher. */
+    /** @var \Vixel\Hasher\PasswordHasherInterface|null The built password hasher. */
     private PasswordHasherInterface|null $passwordHasher = null;
 
-    /** @var array $aliases A list of string aliases toward the password hasher constants. */
+    /** @var array A list of string aliases toward the password hasher constants. */
     protected static array $aliases = [
-        'moderate' => \SODIUM_CRYPTO_PWHASH_OPSLIMIT_MODERATE,
+        'moderate'    => \SODIUM_CRYPTO_PWHASH_OPSLIMIT_MODERATE,
         'interactive' => \SODIUM_CRYPTO_PWHASH_OPSLIMIT_INTERACTIVE,
-        'sensitive' => \SODIUM_CRYPTO_PWHASH_OPSLIMIT_SENSITIVE,
-        'default' => \PASSWORD_DEFAULT,
-        'bcrypt' => \PASSWORD_BCRYPT,
-        'argon2i' => \PASSWORD_ARGON2I,
-        'argon2id' => \PASSWORD_ARGON2ID,
+        'sensitive'   => \SODIUM_CRYPTO_PWHASH_OPSLIMIT_SENSITIVE,
+        'default'     => \PASSWORD_DEFAULT,
+        'bcrypt'      => \PASSWORD_BCRYPT,
+        'argon2i'     => \PASSWORD_ARGON2I,
+        'argon2id'    => \PASSWORD_ARGON2ID,
     ];
 
-    /** @var array $supportedPasswordHashers A list of supported password hashers. */
+    /** @var array A list of supported password hashers. */
     protected static array $supportedPasswordHashers = [
         'standard',
-        'sodium'
+        'sodium',
     ];
 
-    /** @var array $supportedSodiumOptions A list of supported sodium options. */
+    /** @var array A list of supported sodium options. */
     protected static array $supportedSodiumOptions = [
         'moderate',
         'interactive',
         'sensitive',
     ];
 
-    /** @var array $supportedAlgos A list of supported password algos. */
+    /** @var array A list of supported password algos. */
     protected static array $supportedAlgos = [
         'default',
         'bcrypt',
@@ -108,9 +107,9 @@ class PasswordHasherFactory implements PasswordHasherInterface
         } else {
             $this->passwordHasher = new SodiumPasswordHasher($options);
         }
+
         return $this;
     }
-
 
     /**
      * Compute a new hash.
@@ -127,6 +126,7 @@ class PasswordHasherFactory implements PasswordHasherInterface
         if (\is_null($this->passwordHasher)) {
             throw new RuntimeException('A password hasher was not built.');
         }
+
         return $this->passwordHasher->compute($password);
     }
 
@@ -145,6 +145,7 @@ class PasswordHasherFactory implements PasswordHasherInterface
         if (\is_null($this->passwordHasher)) {
             throw new RuntimeException('A password hasher was not built.');
         }
+
         return $this->passwordHasher->verify($password, $hash);
     }
 
@@ -162,6 +163,7 @@ class PasswordHasherFactory implements PasswordHasherInterface
         if (\is_null($this->passwordHasher)) {
             throw new RuntimeException('A password hasher was not built.');
         }
+
         return $this->passwordHasher->needsRehash($hash);
     }
 
