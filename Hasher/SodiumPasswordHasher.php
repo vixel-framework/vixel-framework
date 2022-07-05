@@ -1,6 +1,6 @@
 <?php
 /**
- * GNU Lesser General Public License v2.1
+ * GNU Lesser General Public License v2.1.
  *
  * Copyright (c) 2022 Nicholas English
  *
@@ -20,7 +20,7 @@ class SodiumPasswordHasher implements PasswordHasherInterface
 {
     use PasswordLengthChecker;
 
-    /** @var array $options The password hasher options. */
+    /** @var array The password hasher options. */
     private array $options = [];
 
     /**
@@ -51,6 +51,7 @@ class SodiumPasswordHasher implements PasswordHasherInterface
         if ($this->isPasswordTooLong($password)) {
             throw new InvalidArgumentException('The password supplied is too long.');
         }
+
         return \sodium_crypto_pwhash_str(
             $password,
             $this->options['opslimit'],
