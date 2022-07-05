@@ -29,4 +29,17 @@ trait PasswordLengthChecker
     {
         return Binary::safeStrlen($password) > PasswordHasherInterface::MAX_PW_LENGTH;
     }
+
+    /**
+     * Check to see if a password is too short.
+     *
+     * @param string $password The user's password.
+     *
+     * @return bool Returns true if the password is too short
+     *              else return false.
+     */
+    public function isPasswordTooShort(string $password): bool
+    {
+        return Binary::safeStrlen($password) < PasswordHasherInterface::MIN_RECOMMENDED_PW_LENGTH;
+    }
 }
