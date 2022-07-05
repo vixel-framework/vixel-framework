@@ -1,6 +1,6 @@
 <?php
 /**
- * GNU Lesser General Public License v2.1
+ * GNU Lesser General Public License v2.1.
  *
  * Copyright (c) 2022 Nicholas English
  *
@@ -21,7 +21,7 @@ class PasswordHasher implements PasswordHasherInterface
 {
     use PasswordLengthChecker;
 
-    /** @var array $options The password hasher options. */
+    /** @var array The password hasher options. */
     private array $options = [];
 
     /**
@@ -53,6 +53,7 @@ class PasswordHasher implements PasswordHasherInterface
         if ($this->isPasswordTooLong($password)) {
             throw new InvalidArgumentException('The password supplied is too long.');
         }
+
         return \password_hash(Base64::encode(
             \hash('sha384', $password, true)
         ), $this->passwordAlgo, $this->options);
@@ -96,9 +97,9 @@ class PasswordHasher implements PasswordHasherInterface
     {
         $resolver->setDefaults([
             'memory_cost' => \PASSWORD_ARGON2_DEFAULT_MEMORY_COST,
-            'time_cost' => \PASSWORD_ARGON2_DEFAULT_TIME_COST,
-            'threads' => \PASSWORD_ARGON2_DEFAULT_THREADS,
-            'cost' => 10,
+            'time_cost'   => \PASSWORD_ARGON2_DEFAULT_TIME_COST,
+            'threads'     => \PASSWORD_ARGON2_DEFAULT_THREADS,
+            'cost'        => 10,
         ]);
         $resolver->setAllowedTypes('memory_cost', 'int');
         $resolver->setAllowedTypes('time_cost', 'int');
