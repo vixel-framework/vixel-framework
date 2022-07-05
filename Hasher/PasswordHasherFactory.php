@@ -104,9 +104,9 @@ class PasswordHasherFactory implements PasswordHasherInterface
             $options['memlimit'] = $this->aliases[$options['memlimit']];
         }
         if ($desiredHasher === 'standard') {
-            $this->passwordHasher = new PasswordHasher($options['algo'], $options)
+            $this->passwordHasher = new PasswordHasher($options['algo'], $options);
         } else {
-            $this->passwordHasher = new SodiumPasswordHasher($options)
+            $this->passwordHasher = new SodiumPasswordHasher($options);
         }
         return $this;
     }
