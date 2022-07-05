@@ -2,38 +2,37 @@ name: Vixel Hasher
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
   pull_request:
-    branches: [ main ]
+    branches: [ master ]
 
 jobs:
-  build:
-
-    runs-on: ubuntu-latest
+  phpunit:
+    name: PHP ${{ matrix.php-versions }} Test on ${{ matrix.operating-system }}
+    runs-on: ${{ matrix.operating-system }}
     strategy:
-      fail-fast: true
       matrix:
-        php-versions: [8.0, 8.1]
-    
+        operating-system: ['ubuntu-latest']
+        php-versions: ['8.0', '8.1']
+
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v3
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-versions }}
-          extensions: mbstring, sodium
+          extensions: mbstring, intl, sodium
+          ini-values: error_reporting=-1, display_errors=On
           coverage: none
 
-      - name: Validate composer.json and composer.lock
-        run: composer validate --strict
-    
-      - name: Install dependencies
-        run: composer install --prefer-dist --no-progress
+      - name: Install Composer dependencies
+        uses: "ramsey/composer-install@v1"
 
-      - name: Execute tests
+      - name: PHPUnit tests
         run: vendor/bin/phpunit --coverage-clover=coverage.xml
-
+       
       - name: Psalm – Static Analysis for PHP
         uses: psalm/psalm-github-actions@1.1.2
 
