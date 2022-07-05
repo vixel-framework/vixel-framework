@@ -29,7 +29,7 @@ trait PasswordGenerator
      */
     public function generatePassword(int $length): string
     {
-        if ($length <= PasswordHasherInterface::MIN_RECOMMENDED_PW_LENGTH) {
+        if ($length < PasswordHasherInterface::MIN_RECOMMENDED_PW_LENGTH) {
             throw new LengthException(sprintf('Length must be greater than %s', $length));
         }
         $this->generateRandomString($length);
