@@ -27,6 +27,6 @@ trait PasswordLengthChecker
      */
     public function isPasswordTooLong(string $password): bool
     {
-        return Binary::safeStrlen($password) > 4065;
+        return Binary::safeStrlen($password) > PasswordHasherInterface::MAX_PW_LENGTH;
     }
 }
