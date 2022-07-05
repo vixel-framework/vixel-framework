@@ -9,6 +9,7 @@
     },
     "require": {
         "php": ">=8.0",
+        "vixel-framework/generator": "^1.0",
         "paragonie/constant_time_encoding": "^2.4",
         "symfony/options-resolver": "^5.2"
     },
