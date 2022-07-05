@@ -18,14 +18,12 @@ namespace Vixel\Hasher;
  */
 interface PasswordHasherInterface
 {
-    /** @const MIN_RECOMMENDED_PW_LENGTH The recommended minimum password length. */ 
+    /** @const MIN_RECOMMENDED_PW_LENGTH The recommended minimum password length. */
     const MIN_RECOMMENDED_PW_LENGTH = 8;
 
-    /** @const MAX_PASSWORD_LENGTH The maximum password length.
-    const MAX_PW_LENGTH = 4065;
-
     /**
-     * Compute a new hash.
+     * @const MAX_PASSWORD_LENGTH The maximum password length.
+     * const MAX_PW_LENGTH = 4065;
      *
      * @param string $password The password to hash.
      *
